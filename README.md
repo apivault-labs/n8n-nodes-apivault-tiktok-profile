@@ -2,7 +2,7 @@
 
 An [n8n](https://n8n.io) community node for the **TikTok Profile Scraper** — get real-time TikTok profile data by username: followers, likes, total videos, bio, verification status, plus creator-tier and engagement-rate signals.
 
-No TikTok API key. Pay-as-you-go, no monthly subscription. The scraping (residential proxy rotation, retries, WAF bypass, JSON extraction) runs server-side on [Apify](https://apify.com); this node is a thin connector you drive with your own Apify API token.
+No TikTok API key. Pay-as-you-go, no monthly subscription. The scraping (residential proxy rotation, retries, WAF bypass, JSON extraction) runs server-side on [Apify](https://www.apify.com?fpr=06e5d2); this node is a thin connector you drive with your own Apify API token.
 
 Built by **[apivault_labs](https://apify.com/apivault_labs)** — see [all our actors](https://apify.com/apivault_labs).
 
@@ -26,7 +26,7 @@ In your n8n instance:
 
 This node uses an **Apify API token**:
 
-1. Create a free account at [apify.com](https://apify.com)
+1. Create a free account at [apify.com](https://www.apify.com?fpr=06e5d2)
 2. Go to **Apify Console → Settings → Integrations** and copy your **API token**
 3. In n8n, create new **Apify API** credentials and paste the token
 
