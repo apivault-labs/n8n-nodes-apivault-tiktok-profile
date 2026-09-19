@@ -44,33 +44,6 @@ export class TikTokProfile implements INodeType {
 				description:
 					'One or more TikTok usernames, separated by commas or new lines. The leading @ is optional.',
 			},
-			{
-				displayName: 'Use Apify Proxy',
-				name: 'useProxy',
-				type: 'boolean',
-				default: true,
-				description: 'Whether to route requests through Apify proxy (recommended)',
-			},
-			{
-				displayName: 'Proxy Group',
-				name: 'proxyGroup',
-				type: 'options',
-				options: [
-					{ name: 'Residential (recommended)', value: 'RESIDENTIAL' },
-					{ name: 'Datacenter', value: 'DATACENTER' },
-				],
-				default: 'RESIDENTIAL',
-				displayOptions: { show: { useProxy: [true] } },
-				description: 'Residential IPs are far less likely to be blocked by TikTok',
-			},
-			{
-				displayName: 'Max Retries',
-				name: 'maxRetries',
-				type: 'number',
-				typeOptions: { minValue: 0, maxValue: 5 },
-				default: 3,
-				description: 'Per-username retry attempts with a fresh proxy IP',
-			},
 		],
 	};
 
@@ -81,11 +54,6 @@ export class TikTokProfile implements INodeType {
 		for (let i = 0; i < items.length; i++) {
 			try {
 				const raw = this.getNodeParameter('usernames', i) as string;
-				const useProxy = this.getNodeParameter('useProxy', i) as boolean;
-				const proxyGroup = useProxy
-					? (this.getNodeParameter('proxyGroup', i) as string)
-					: 'RESIDENTIAL';
-				const maxRetries = this.getNodeParameter('maxRetries', i) as number;
 
 				const usernames = raw
 					.split(/[,\n]/)
@@ -100,12 +68,7 @@ export class TikTokProfile implements INodeType {
 					);
 				}
 
-				const body = {
-					usernames,
-					maxRetries,
-					proxyGroup,
-					useProxy,
-				};
+				const body = { usernames };
 
 				const options: IRequestOptions = {
 					method: 'POST' as IHttpRequestMethods,
