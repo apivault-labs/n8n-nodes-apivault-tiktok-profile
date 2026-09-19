@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-apivault-tiktok-profile",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "n8n community node for TikTok Profile Scraper — get real-time TikTok profile data (followers, likes, videos, bio, verification) plus creator-tier and engagement-rate signals. No TikTok API key. Pay-as-you-go, no monthly fee.",
   "license": "MIT",
   "homepage": "https://apify.com/apivault_labs/tiktok-profile-scraper",
@@ -33,7 +33,8 @@
     "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "examples"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
