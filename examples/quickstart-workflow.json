@@ -1,0 +1,90 @@
+{
+  "id": "80badddb-751e-5ab5-857f-d896a8440363",
+  "name": "TikTok Profile → Creator snapshot",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "64188e9e-2c46-595a-bc5b-3d07afd30281",
+      "name": "When clicking Execute workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Setup\n1. Select your Apify API credential.\n2. Replace the sample with one or more public usernames.\n3. Run once, then add a Schedule Trigger for monitoring.\n4. Store the final snapshots in a sheet or database.",
+        "height": 300,
+        "width": 460
+      },
+      "id": "4caa0a12-156e-5c8e-b08a-2e9b9c50ff30",
+      "name": "How to use this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "usernames": "khaby.lame"
+      },
+      "id": "15cd4af7-8939-502d-a295-7bcba074e9bc",
+      "name": "Collect TikTok profiles",
+      "type": "n8n-nodes-apivault-tiktok-profile.tikTokProfile",
+      "typeVersion": 1,
+      "position": [
+        260,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const j = $json; return { json: { ...j, creatorSnapshot: { username: j.username ?? j.uniqueId ?? '', followers: Number(j.followers ?? j.followerCount ?? 0), likes: Number(j.likes ?? j.heartCount ?? 0), videos: Number(j.videos ?? j.videoCount ?? 0), verified: Boolean(j.verified), observedAt: new Date().toISOString() } } };"
+      },
+      "id": "81f693fa-0a3e-51c3-b437-98e39cc4d708",
+      "name": "Build creator snapshot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking Execute workflow": {
+      "main": [
+        [
+          {
+            "node": "Collect TikTok profiles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Collect TikTok profiles": {
+      "main": [
+        [
+          {
+            "node": "Build creator snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "ef65a2fc-cdf4-510f-9326-ba804a3379dd",
+  "tags": []
+}
